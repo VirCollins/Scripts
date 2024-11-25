@@ -1,0 +1,28 @@
+/*exports.getfile = async (req, res) => {
+    try {
+        if (!req.files) {
+            res.status(400).json({ message: "Seleccione un archivo" });
+        } else {
+            const file = req.files.avatar; // Nombre del campo en el formulario
+            const filePath = "./uploads/" + file.name;
+
+            // Mueve el archivo a la carpeta de destino
+            file.mv(filePath);
+
+            // Crea un nuevo documento en la colección ProyectoMarvel
+            const newMarvelProject = new ProyectoMarvel({
+                img: {
+                    data: fs.readFileSync(filePath), // Lee el archivo como datos binarios
+                    contentType: file.mimetype // Tipo de contenido (por ejemplo, "image/png")
+                }
+            });
+
+            // Guarda el documento en la base de datos
+            await newMarvelProject.save();
+
+            res.send('¡Archivo subido exitosamente y guardado en la base de datos!');
+        }
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+};*/

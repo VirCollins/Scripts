@@ -1,0 +1,52 @@
+exports.createProyectoMarvel = async (req,res)=>{
+    try {
+        console.log('Se ejecuto');
+        const info = new ProyectoMarvel({
+            nombre: req.body.nombre,
+            apellido:req.body.apellido,
+            edad:req.body.edad,
+            genero:req.body.genero,
+            numero_telefono:req.body.numero_telefono
+        });
+        if(info === null || info === undefined)
+        {
+            res.status(401).send('Error de datos vacios');
+            return;
+        }
+            const infoGuardado = await info.save();
+            console.log('Se ejecuto info.save');
+            res.status(200).send(infoGuardado);
+        
+    } catch (err) {
+        console.log('Error en createProyectoMarvel',err);
+        res.status(500).send('error en el servidor');
+    }
+}
+
+
+exports.updateProyectoMarvel = async(req, res) =>
+{
+    try {
+        const {id} = req.params;
+        const UpdateInfo =({
+            nombre: req.body.nombre,
+            apellido:req.body.apellido,
+            edad:req.body.edad,
+            genero:req.body.genero,
+            numero_telefono:req.body.numero_telefono
+        });
+    
+        const updateProyectoMarvel = await ProyectoMarvel.findByIdAndUpdate(id,UpdateInfo);
+        if(updateProyectoMarvel)
+        {
+            res.status(200).send(updateProyectoMarvel);
+        }else
+        {
+            res.status(400).send("No se encontro el Proyecto Marvel con el id enviado");
+        }
+    } catch (err) {
+        console.log('Error en updateProyectoMarvel',err);
+        res.status(500).send('error en el servidor');
+    }
+
+}
